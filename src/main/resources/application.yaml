@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: hr
+    url: jdbc:oracle:thin:@//localhost:1521/ORCLPDB
+    password: isdb62
+  application:
+    name: first
+  jpa:
+    properties:
+      hibernate:
+        format_sql: 'true'
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
+  profiles:
+    active: prod
+server:
+  port: '8081'

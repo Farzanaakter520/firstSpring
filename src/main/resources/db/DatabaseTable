@@ -1,0 +1,13 @@
+CREATE TABLE employee_sb(
+		id NUMBER GENERATED ALWAYS AS IDENTITY START WITH 1 INCREMENT BY 1 PRIMARY KEY,
+		name VARCHAR2(255) NOT NULL,
+		email VARCHAR(255) UNIQUE NOT NULL,
+		designation VARCHAR2(255),
+		age NUMBER(3),
+		address VARCHAR2(255),
+		bod DATE,
+		salary NUMBER(10,2)		
+);
+
+
+SELECT * FROM employee_sb;
