@@ -1,84 +1,58 @@
 package org.isdb.first.model;
 
-import java.time.LocalDate;
+import java.time.Instant;
+import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Entity(name = "student_sb")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity(name = "T_STUDENT")
 
 public class Student {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	private String name;
-	private String clazz;
-	private int age;
-	private String address;
-	private LocalDate dob;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
-	public Student() {
+    @Column(nullable = false, length = 30)
+    private String name;
 
-	}
+    @Column(nullable = false, length = 50)
+    private String email;
 
-	public Student(int id, String name, String clazz, int age, String address, LocalDate dob) {
+	@OneToOne
+	@JoinColumn(name = "clazz", referencedColumnName = "id", nullable = false)
+    private Class clazz;
 
-		this.id = id;
-		this.name = name;
-		this.clazz = clazz;
-		this.age = age;
-		this.address = address;
-		this.dob = dob;
-	}
+    @Column(nullable = false, unique = true, length = 10)
+    private int roll;
 
-	public int getId() {
-		return id;
-	}
+	@OneToMany(mappedBy = "student")
+    private List<Book> books;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    @Column(nullable = false, length = 17)
+    private String phone;
 
-	public String getName() {
-		return name;
-	}
+	@Column(length = 100)
+    private String address;
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getClazz() {
-		return clazz;
-	}
-
-	public void setClazz(String clazz) {
-		this.clazz = clazz;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public LocalDate getDob() {
-		return dob;
-	}
-
-	public void setDob(LocalDate dob) {
-		this.dob = dob;
-	}
-
+    @Column(nullable = false, length = 10)
+    private String gender;
+    
+	@Column(nullable = false, length = 30)
+    private Instant dob;
+    
 }
