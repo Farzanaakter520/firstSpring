@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,24 +20,26 @@ import lombok.Setter;
 @Entity(name = "T_BOOK")
 
 public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 
-    @Column(nullable = false, length = 100)
-    private String name;
+	@Column(nullable = false, length = 100)
+	private String name;
 
-    @Column(nullable = false, length = 100)
-    private String author;
+	@Column(nullable = false, length = 100)
+	private String author;
 
-    @Column(nullable = false, length = 100)
-    private String publisher;
+	@Column(nullable = false, length = 100)
+	private String publisher;
 
-    private Class clazz;
+	@OneToOne
+	@JoinColumn(name = "clazz", referencedColumnName = "id")
+	// @Transient(don't make column )
+	private StudentClass clazz;
 
-    @ManyToOne
-    @JoinColumn(name = "student", nullable = false)
-    private Student student;
-
+	@ManyToOne
+	@JoinColumn(name = "student", nullable = false)
+	private Student student;
 
 }

@@ -3,6 +3,10 @@ package org.isdb.first.model;
 import java.math.BigDecimal;
 import java.time.Instant;
 
+import org.isdb.first.Config.InstantDeserializer;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,7 +26,7 @@ import lombok.Setter;
 public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
 
     @Column(nullable = false, length = 30)
     private String name;
@@ -39,14 +43,15 @@ public class Teacher {
     @Column(nullable = false)
     private String phone;
 
+    @JsonDeserialize(using = InstantDeserializer.class)
     @Column(name = "joining_date", nullable = false,updatable = false)
     private Instant joiningDate;
 
     @Column(nullable = false)
     private BigDecimal salary;
     
-    @Column(name="marital_status")
-    private boolean maritalStatus;
+    @Column(name="is_married")
+    private Boolean isMarried;
     
 }
 

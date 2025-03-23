@@ -19,10 +19,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity(name = "T_CLASS")
 
-public class Class {
+public class StudentClass {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
 
     @Column(nullable = false, length = 50)
     private String name;
