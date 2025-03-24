@@ -28,8 +28,9 @@ public class TeacherController {
     }
 
     @PostMapping
-    public Teacher saveTeacher(@RequestBody Teacher teacher) {
-        return teacherService.saveTeacher(teacher);
+    public ResponseEntity<?> saveTeacher(@RequestBody Teacher teacher) {
+        Teacher saved = teacherService.saveTeacher(teacher);
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
