@@ -1,5 +1,82 @@
 package org.isdb.first.service;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.isdb.first.dto.BookDTO;
+import org.isdb.first.model.Book;
+import org.isdb.first.model.StudentClass;
+import org.isdb.first.repository.BookRepository;
+import org.springframework.stereotype.Service;
+
+
+
+@Service
 public class BookService {
+    private final BookRepository bookRepository;
+
+    private final StudentClassService studentClassService;
+
+    public BookService(BookRepository bookRepository, StudentClassService studentClassService) {
+        this.bookRepository = bookRepository;
+        this.studentClassService = studentClassService;
+    }
+
+    public Book saveBook(BookDTO bookDTO) {
+        Integer classId = bookDTO.getClazzId();
+        StudentClass clazz = studentClassService.getStudentClass(classId);
+
+        Book book = new Book();
+        book.setName(bookDTO.getName());
+        book.setAuthor(bookDTO.getAuthor());
+        book.setPublisher(bookDTO.getPublisher());
+        if (clazz != null)
+        book.setClazz(clazz);
+
+        return bookRepository.save(book);
+       
+    }
+
+    public List<Book> getAllBook() {
+        return bookRepository.findAll();
+        
+    }
+
+    public void deleteBook(Integer id) {
+        bookRepository.deleteById(id);
+    }
+
+    public Book updateBook(Integer id, Book book) {
+        Optional<Book> bookOptional = bookRepository.findById(id);
+
+        if (bookOptional.isPresent()) {
+            Book aBook = new Book();
+            if(book.getName() != null){
+                aBook.setName(book.getName());
+            }
+            if(book.getAuthor() != null){
+                aBook.setAuthor(book.getAuthor());
+            }
+            if(book.getPublisher() != null){
+                aBook.setPublisher(book.getPublisher());
+            }
+            if(book.getClazz() != null){
+                Integer clazzId = book.getClazz().getId();
+                StudentClass clazz = studentClassService.getStudentClass(clazzId);
+                if (clazz == null){
+                    throw new IllegalArgumentException("Class not found");
+                }
+                aBook.setClazz(clazz);
+            }
+            return bookRepository.save(aBook);
+        } else {
+            throw new IllegalArgumentException("Book not found");
+        } 
+    }
+
+    public Book getBook(Integer id) {
+        return bookRepository.findById(id).orElse(null);
+        
+    }
     
 }
