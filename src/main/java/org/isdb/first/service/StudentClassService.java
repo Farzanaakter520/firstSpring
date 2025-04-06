@@ -3,6 +3,8 @@ package org.isdb.first.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.isdb.first.dao.ClassTeacher;
+import org.isdb.first.dao.ClassTeacherProjection;
 import org.isdb.first.dto.StudentClassDTO;
 import org.isdb.first.model.StudentClass;
 import org.isdb.first.model.Teacher;
@@ -70,5 +72,10 @@ public class StudentClassService {
         }else{
             throw new IllegalArgumentException("Class not found");
         }
+    }
+
+
+    public List<ClassTeacherProjection> getAllClassTeacher() {
+       return studentClassRepository.getAllClassTeacher();
     } 
 }

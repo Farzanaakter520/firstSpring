@@ -1,17 +1,14 @@
 package org.isdb.first.service;
 
 import lombok.extern.slf4j.Slf4j;
-
-import org.isdb.StudentCRUD.dto.StudentDTO;
-import org.isdb.StudentCRUD.model.Student;
-import org.isdb.StudentCRUD.model.StudentClass;
-import org.isdb.StudentCRUD.repository.StudentRepository;
+import org.isdb.first.dto.StudentDTO;
+import org.isdb.first.model.Student;
+import org.isdb.first.model.StudentClass;
+import org.isdb.first.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
-import org.isdb.first.repository.StudentRepository;
 
 @Slf4j
 @Service
@@ -26,7 +23,7 @@ public class StudentService {
     }
 
     public Student saveStudent(StudentDTO studentDTO) {
-        // TODO: In next class add books to student (For now skip the part)
+        
         Integer classId = studentDTO.getClassId();
         StudentClass clazz = studentClassService.getStudentClass(classId);
 

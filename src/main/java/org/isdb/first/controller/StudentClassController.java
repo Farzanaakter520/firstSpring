@@ -2,6 +2,8 @@ package org.isdb.first.controller;
 
 import java.util.List;
 
+import org.isdb.first.dao.ClassTeacher;
+import org.isdb.first.dao.ClassTeacherProjection;
 import org.isdb.first.dto.StudentClassDTO;
 import org.isdb.first.model.StudentClass;
 import org.isdb.first.service.StudentClassService;
@@ -59,6 +61,11 @@ public class StudentClassController {
     public StudentClass updateStudentClass(@PathVariable Integer id, @RequestBody StudentClassDTO classDTO) {
         StudentClass updated = studentClassService.updateStudentClass(id, classDTO);
         return updated;
+    }
+
+    @GetMapping("/getAllClassTeacher")
+    public List<ClassTeacherProjection> getAllClassTeacher(){
+        return studentClassService.getAllClassTeacher();
     }
 
 }
