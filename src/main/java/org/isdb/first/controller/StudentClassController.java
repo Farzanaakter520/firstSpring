@@ -2,7 +2,6 @@ package org.isdb.first.controller;
 
 import java.util.List;
 
-import org.isdb.first.dao.ClassTeacher;
 import org.isdb.first.dao.ClassTeacherProjection;
 import org.isdb.first.dto.StudentClassDTO;
 import org.isdb.first.model.StudentClass;
@@ -67,6 +66,11 @@ public class StudentClassController {
     public List<ClassTeacherProjection> getAllClassTeacher(){
         return studentClassService.getAllClassTeacher();
     }
+
+    // @GetMapping("/getAllActiveUser")
+    // public List<ClassTeacherProjection> getAllActiveUser(){
+    //     return studentClassService.getAllActiveUser();
+    // }
 
 }
 
